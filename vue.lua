@@ -169,6 +169,12 @@ defProp = function (obj)
             if old_v ~= v then
                 store[index] = v
                 observe(v)
+                if old_v == nil then
+                    local ob = rawget(t, "__ob__")
+                    if ob then
+                        ob.dep:notify()
+                    end
+                end
                 if depMap[index] then 
                     depMap[index]:notify() 
                 end
