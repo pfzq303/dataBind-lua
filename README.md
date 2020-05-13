@@ -11,7 +11,10 @@ local data = {
    bb = 3,
    1,2,3
 }
-local vm = Vue.new(data, " self:sum() + a" , function(value, oldValue)
+-- Vue.new(数据对象， 表达式， 监听函数，附加项)
+-- 表达式支持正常的lua语法。支持直接访问data数据和computed数据
+-- 其中附加项中computed 支持在表达式中使用self进行调用
+local vm = Vue.new(data, " self:sum() + bb" , function(value, oldValue)
     print(value, oldValue)
 end, {
     computed = {
